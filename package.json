@@ -6,7 +6,7 @@
     "ext": "js, json, ejs, css"
   },
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "node ./bin/www",
     "dev": "DEBUG=odinbook:* npm start"
   },
   "dependencies": {
