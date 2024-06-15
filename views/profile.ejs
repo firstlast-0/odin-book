@@ -1,0 +1,65 @@
+<%- include('header') -%>
+
+<a href="/posts">Home</a>
+<a href="/new-post">New Post</a>
+<a href="/users">All Users</a>
+<a href="/logout">Logout</a>
+<br>
+<h2>Profile Page</h2>
+<img src="<%= 'https://www.gravatar.com/avatar/' + user.id + '?s=100&d=robohash' %>" />
+<br>
+Username: <%= user.username %><br><br>
+Following:
+<% for (let followedUser of user.following) {%>
+    <% for (let user of allUsers) {%>
+        <% if (user.id === followedUser) {%>
+            <%= user.username %>, 
+        <% } %>
+    <% } %>
+<% } %>
+<br><br>
+Follow Requests: 
+<% for (let req of user.follow_requests) {%>
+    <% for (let user of allUsers) {%>
+        <% if (user.id === req) {%>
+            <%= user.username %>
+            <form action="<%= '/users/' + currentUser.id + '/accept' %>" method="post">
+                <input type="hidden" name="id" value="<%= user.id %>">
+                <button>ACCEPT</button>
+            </form>
+        <% } %>
+    <% } %>
+<% } %>
+<br><br>
+Posts: 
+<br><br>
+<% for (let post of allPosts) {%>
+    <% if (post.by.id === user.id) {%>
+        Text: <%= post.text %><br>
+        Time: <%= post.time.getDate() %><br>
+        Likes: <%= post.likedBy.length %><br>
+        Comments: <br>
+        <% for(let comment of allComments) {%>
+            <% if (comment.on.id == post.id) {%>
+                <%= comment.by.username %>: <%= comment.text %><br>
+            <% }%>
+        <% } %>
+        <a href="<%= '/posts/' + post._id  + '/comment' %>">Comment</a>
+            <% if (post.likedBy.includes(currentUser.id)) {%>
+                <button disabled>Liked</button>
+            <% } else { %>
+                <form action="<%= '/posts/' + post._id + '/like' %>" method="post">
+                    <button>Like</button>
+                </form>
+            <% } %>
+        <br><br>
+    <% } %>
+<% } %>
+
+<% if(locals.errors) {%>
+    <% for(let err of errors) {%>
+        <h3><%= err.msg %></h3>
+    <% } %>
+<% }%>
+
+<%- include('footer') -%>

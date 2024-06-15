@@ -1,0 +1,43 @@
+<%- include('header') -%>
+
+<a href="/new-post">New Post</a>
+<a href="<%= '/users/' + currentUser.id %>">Profile</a>
+<a href="/users">All Users</a>
+<a href="/logout">Logout</a>
+<br><br>
+Welcome back, <%= currentUser.username %>!<br><br>
+<% for(let post of allPosts) {%>
+    <% if (user.following.includes(post.by.id) || user.id === post.by.id) {%>
+        <div>
+            Text: <%= post.text %><br>
+            By: <a href="<%= '/users/' + post.by.id %>"><%= post.by.username %></a><br>
+            Time: <%= post.time.getDate() %><br>
+            Likes: <%= post.likedBy.length %>
+            <br>
+            Comments: <br>
+            <% for(let comment of allComments) {%>
+                <% if (comment.on.id == post.id) {%>
+                    <%= comment.by.username %>: <%= comment.text %><br>
+                <% }%>
+            <% } %>
+            <a href="<%= '/posts/' + post._id  + '/comment' %>">Comment</a>
+            <% if (post.likedBy.includes(user.id)) {%>
+                <button disabled>Liked</button>
+            <% } else { %>
+                <form action="<%= '/posts/' + post._id + '/like' %>" method="post">
+                    <button>Like</button>
+                </form>
+            <% } %>
+            
+            <hr>
+        </div>
+    <% } %>
+<% } %>
+
+<% if(locals.errors) {%>
+    <% for(let err of errors) {%>
+        <h3><%= err.msg %></h3>
+    <% } %>
+<% }%>
+
+<%- include('footer') -%>

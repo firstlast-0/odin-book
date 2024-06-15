@@ -1,0 +1,44 @@
+<%- include('header') -%>
+
+<% if (currentUser) {%>
+    <h1>WELCOME BACK <%= currentUser.username %> (<%= currentUser.status %>)</h1>
+    <a href="/new-msg">CREATE NEW MESSAGE</a>
+    <a href="/join-club">JOIN CLUB</a>
+    <a href="/log-out">LOG OUT</a>
+    <br><br>
+    <h2>ALL MESSAGES</h2>
+    <% for(let msg of allMsgs) {%>
+        <div>
+            Title: <%= msg.title %><br>
+            Message: <%= msg.text %><br>
+            Date: <%= (currentUser.status === 'Member' && currentUser.admin === null) ? '???' : msg.date %><br>
+            By: <%= (currentUser.status === 'Member'  && currentUser.admin === null) ? '???' : msg.by.username %><br>
+            <% if (currentUser.Admin) {%>
+                <form action="" method="post">
+                    <input type="hidden" name="id" value="<%= msg.id %>">
+                    <button>DELETE MESSAGE</button>
+                </form>
+            <% } %>
+        </div><br>
+    <% } %>
+
+<% } else { %>
+    <a href="/sign-up">SIGN UP</a>
+    <h1>Log in form</h1>
+    <form action="/log-in" method="POST">
+        <label for="username">Username</label>
+        <input name="username" />
+
+        <label for="password">Password</label>
+        <input name="password" type="password" />
+
+        <button>Log In</button>
+    </form>
+<%}%>
+
+<% if(locals.errors) {%> 
+    <% for(let err of errors) {%>
+        <h3><%= err.msg %></h3>
+    <% } %> <% }%>
+
+<%- include('footer') -%>

@@ -1,0 +1,14 @@
+<%- include('header') -%>
+
+<a href="/posts">HOME</a>
+<a href="/logout">LOG OUT</a>
+<br><br>
+<h2>Create New Post</h2>
+<form action="/new-post" method="post">
+    <label for="text">Text </label>
+    <textarea name="text" id="text" cols="30" rows="10" required></textarea>
+    <br><br>
+    <button>Post</button>
+</form>
+    
+<%- include('footer') -%>

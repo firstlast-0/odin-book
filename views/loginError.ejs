@@ -1,0 +1,13 @@
+<%- include('header') -%>
+
+<a href="/login">Log In</a>
+<a href="/">Sign Up</a><br>
+<h1>Please log-in first</h1>
+
+<% if(locals.errors) {%>
+    <% for(let err of errors) {%>
+        <h3><%= err.msg %></h3>
+    <% } %>
+<% }%>
+
+<%- include('footer') -%>

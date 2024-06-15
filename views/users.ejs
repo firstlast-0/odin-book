@@ -1,0 +1,35 @@
+<%- include('header') -%>
+
+<a href="/posts">Home</a>
+<a href="/new-post">New Post</a>
+<a href="<%= '/users/' + currentUser.id %>">Profile</a>
+<a href="/logout">Logout</a>
+<br>
+<h2>ALL USERS</h2>
+<br><br>
+<% for(let user of allUsers) {%>
+    <% if (user.id !== currentUser.id) {%>
+        <% if (!currentUser.following.includes(user.id)) {%>
+            <div>       
+                Username: <a href="<%= '/users/' + user.id %>"><%= user.username %></a><br>
+                <% if (user.follow_requests.includes(currentUser.id)) { %>
+                    <button disabled>PENDING</button>
+                <% } else { %>
+                    <form action="<%= '/users/' + user.id + '/follow' %>" method="post">
+                        <button>FOLLOW</button>
+                    </form>
+                <% } %>
+                <br>
+                <hr>
+            </div>
+        <% }%>
+    <% }%>
+<% } %>
+
+<% if(locals.errors) {%>
+    <% for(let err of errors) {%>
+        <h3><%= err.msg %></h3>
+    <% } %>
+<% }%>
+
+<%- include('footer') -%>
