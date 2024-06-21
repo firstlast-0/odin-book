@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  padding: 0;
+  padding: 15px;
   background-color: rgb(30, 30, 30);
   color: white;
   font-family: 'Courier New', monospace;    
@@ -8,9 +8,72 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: cornflowerblue;
+  text-decoration: none;
+}
+
+a:hover {
+  color: cyan;
 }
 
 form {
   display: inline-block;
+}
+
+.nav {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.posts {
+  display: grid;
+  grid-template-columns: 750px;
+  gap: 35px;
+  justify-content: center;
+}
+
+.post {
+  display: flex;
+  gap: 15px;
+  text-align: left;
+  border: 3px solid cornflowerblue;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.user {
+  display: flex;
+  flex-direction: column;
+}
+
+.user, .main, .comment {
+  flex-grow: 1;
+}
+
+.main {
+  flex-grow: 0;
+  flex-basis: 500px;
+  font-size: 0.9rem;
+  color: #a5a5a5;
+}
+
+.comment {
+  flex-shrink: 0;
+}
+
+.name {
+  font-size: 1.6rem;
+}
+
+.text {
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+}
+
+img {
+  width: 100px;
+  height: 100px;
 }
