@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const User = require('./models/user');
 
-const mongoDb = 'mongodb+srv://user:admin123@cluster0.hiiatiy.mongodb.net/odin-book?retryWrites=true&w=majority&appName=Cluster0';
+const mongoDb = process.env.dbURL;
 mongoose.connect(mongoDb);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'mongo connection error'));
