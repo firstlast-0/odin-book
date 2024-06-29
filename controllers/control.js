@@ -54,6 +54,19 @@ exports.posts_get = [ loginCheck,
     asyncHandler(async (req, res, next) => {
         const user = await User.findById(req.user.id);
         const allPosts = await Post.find({}).populate("by").sort('-time');
+        let relevantPosts = [];
+        for (let post of allPosts) {
+            if (user.following.includes(post.by.id) || user.id === post.by.id) {
+                relevantPosts.push(post)
+            }
+        }
+
+        if (relevantPosts.length === 0) {
+            res.render("posts", { user, message: 'No posts to show' });
+        } else {
+            
+        }
+        
         const allComments = await Comment.find({}).populate("on").populate("by");
         res.render("posts", { user, allPosts, allComments });
 })];

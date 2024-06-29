@@ -7,43 +7,49 @@
     <a href="/logout">Logout</a>
 </div>
 <h1>Welcome back, <%= currentUser.username %>!</h1><br>
-<div class="posts">
-    <% for(let post of allPosts) {%>
-        <% if (user.following.includes(post.by.id) || user.id === post.by.id) {%>
-            <div class="post">
-                <div class="user">
-                    <img src="<%= 'https://www.gravatar.com/avatar/' + post.by.id + '?s=100&d=robohash' %>" />
-                    <span class="name"><a href="<%= '/users/' + post.by.id %>"><%= post.by.username %></a></span>
-                </div>
 
-                <div class="main">
-                    <span class="text"><%= post.text %></span><br><br>
-                    <b>Posted on:</b> <%= (post.time.getMonth()+1) + "/" + post.time.getDate() + "/" + post.time.getFullYear() + " " + post.time.getHours() + ":" + post.time.getMinutes() %>
-                    <br>
-                    <b>Likes:</b> <%= post.likedBy.length %>
+<% if (locals.message) {%>
+    No posts to show. Click <a href="/users">here</a> to follow more people
+<% } else { %>
+    <div class="posts">
+        <% for(let post of allPosts) {%>
+            <% if (user.following.includes(post.by.id) || user.id === post.by.id) {%>
+                <div class="post">
+                    <div class="user">
+                        <img src="<%= 'https://www.gravatar.com/avatar/' + post.by.id + '?s=100&d=robohash' %>" />
+                        <span class="name"><a href="<%= '/users/' + post.by.id %>"><%= post.by.username %></a></span>
+                    </div>
+    
+                    <div class="main">
+                        <span class="text"><%= post.text %></span><br><br>
+                        <b>Posted on:</b> <%= (post.time.getMonth()+1) + "/" + post.time.getDate() + "/" + post.time.getFullYear() + " " + post.time.getHours() + ":" + post.time.getMinutes() %>
+                        <br>
+                        <b>Likes:</b> <%= post.likedBy.length %>
+                    </div>
+                    
+                    <div class="comment">
+                        <a href="<%= '/posts/' + post._id  + '/comment' %>">Comment</a>
+                        <% if (post.likedBy.includes(user.id)) {%>
+                            <button disabled>Liked</button>
+                        <% } else { %>
+                            <form action="<%= '/posts/' + post._id + '/like' %>" method="post">
+                                <button>Like</button>
+                            </form>
+                        <% } %>
+                        <br><br>
+                        <b>Comments:</b> <br>
+                        <% for(let comment of allComments) {%>
+                            <% if (comment.on.id == post.id) {%>
+                                <%= comment.by.username %>: <%= comment.text %><br>
+                            <% }%>
+                        <% } %>
+                    </div>
                 </div>
-                
-                <div class="comment">
-                    <a href="<%= '/posts/' + post._id  + '/comment' %>">Comment</a>
-                    <% if (post.likedBy.includes(user.id)) {%>
-                        <button disabled>Liked</button>
-                    <% } else { %>
-                        <form action="<%= '/posts/' + post._id + '/like' %>" method="post">
-                            <button>Like</button>
-                        </form>
-                    <% } %>
-                    <br><br>
-                    <b>Comments:</b> <br>
-                    <% for(let comment of allComments) {%>
-                        <% if (comment.on.id == post.id) {%>
-                            <%= comment.by.username %>: <%= comment.text %><br>
-                        <% }%>
-                    <% } %>
-                </div>
-            </div>
+            <% } %>
         <% } %>
-    <% } %>
-</div>
+    </div>
+<% } %>   
+
 
 <% if(locals.errors) {%>
     <% for(let err of errors) {%>
