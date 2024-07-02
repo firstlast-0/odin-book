@@ -1,12 +1,6 @@
 <%- include('header') -%>
 
-<a href="/posts">Home</a>
-<a href="/new-post">New Post</a>
-<% if (user.id !== currentUser.id) { %>
-    <a href="<%= '/users/' + currentUser.id %>">Profile</a>
-<% } %>
-<a href="/users">All Users</a>
-<a href="/logout">Logout</a>
+<%- include('nav') -%>
 <br>
 <h2>Profile Page</h2>
 <img src="<%= 'https://www.gravatar.com/avatar/' + user.id + '?s=100&d=robohash' %>" />
@@ -23,7 +17,7 @@ Following:
 <br><br>
 <% if (user.id === currentUser.id) { %>
     Follow Requests: 
-    <% for (let req of user.follow_requests) {%>
+    <% for (let req of user.follow_requests) { %>
         <% for (let user of allUsers) {%>
             <% if (user.id === req) {%>
                 <%= user.username %>

@@ -1,10 +1,6 @@
 <%- include('header') -%>
 
-<a href="/posts">Home</a>
-<a href="/new-post">New Post</a>
-<a href="<%= '/users/' + currentUser.id %>">Profile</a>
-<a href="/users">All Users</a>
-<a href="/logout">Logout</a>
+<%- include('nav') -%>
 <br><br>
 <h2>Add Comment</h2>
 <form action="" method="post">

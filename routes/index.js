@@ -24,4 +24,8 @@ router.post('/posts/:postid/comment', control.newcomment_post);
 
 router.post('/posts/:postid/like', control.like_post);
 
+router.get('/posts/:postid/delete', control.deletePost_get);
+
+router.post('/posts/:postid/delete', control.deletePost_post);
+
 module.exports = router;

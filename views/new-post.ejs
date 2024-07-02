@@ -1,9 +1,6 @@
 <%- include('header') -%>
 
-<a href="/posts">Home</a>
-<a href="<%= '/users/' + currentUser.id %>">Profile</a>
-<a href="/users">All Users</a>
-<a href="/logout">Logout</a>
+<%- include('nav') -%>
 <br><br>
 <h2>Create New Post</h2>
 <form action="/new-post" method="post">

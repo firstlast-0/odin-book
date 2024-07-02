@@ -1,0 +1,47 @@
+<%- include('header') -%>
+
+<%- include('nav') -%>
+<br><br>
+<h2>Delete Post</h2>
+
+<div class="posts">
+    <div class="post">
+        <div class="user">
+            <img src="<%= 'https://www.gravatar.com/avatar/' + user.id + '?s=100&d=robohash' %>" />
+            <span class="name"><a href="<%= '/users/' + post.by.id %>"><%= post.by.username %></a></span>
+        </div>
+
+        <div class="main">
+            <span class="text"><%= post.text %></span><br><br>
+            <b>Posted on:</b> <%= (post.time.getMonth()+1) + "/" + post.time.getDate() + "/" + post.time.getFullYear() + " " + post.time.getHours() + ":" + post.time.getMinutes() %>
+            <br>
+            <b>Likes:</b> <%= post.likedBy.length %>
+        </div>
+    
+        <div class="comment">
+            <a href="<%= '/posts/' + post._id  + '/comment' %>">Comment</a>
+
+            <% if (post.likedBy.includes(user.id)) { %>
+                <button disabled>Liked</button>
+            <% } else { %>
+                <form action="<%= '/posts/' + post._id + '/like' %>" method="post">
+                    <button>Like</button>
+                </form>
+            <% } %>
+            <br><br>
+            <b>Comments:</b><br>
+            <% for(let comment of allComments) {%>
+                <% if (comment.on.id == post.id) {%>
+                    <%= comment.by.username %>: <%= comment.text %><br>
+                <% }%>
+            <% } %>
+        </div>
+    </div>
+</div>
+<br><br>
+<form action="/posts/:postid/delete" method="post">
+    Are you sure you want to delete this post?
+    <button name="postid" value="<%= post.id %>">Delete</button>
+</form>
+    
+<%- include('footer') -%>

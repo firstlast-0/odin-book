@@ -1,11 +1,8 @@
 <%- include('header') -%>
 
-<a href="/posts">Home</a>
-<a href="/new-post">New Post</a>
-<a href="<%= '/users/' + currentUser.id %>">Profile</a>
-<a href="/logout">Logout</a>
+<%- include('nav') -%>
 <br>
-<h2>ALL USERS</h2>
+<h2>All Users</h2>
 <br><br>
 <% for(let user of allUsers) {%>
     <% if (user.id !== currentUser.id) {%>

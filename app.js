@@ -9,8 +9,14 @@ const LocalStrategy = require('passport-local').Strategy;
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const User = require('./models/user');
+require('dotenv').config();
 
-const mongoDb = process.env.dbURL;
+if (process.env.localDB) {
+    var mongoDb = process.env.localDB;    
+} else {
+    var mongoDb = process.env.dbURL;
+}
+
 mongoose.connect(mongoDb);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'mongo connection error'));

@@ -54,6 +54,7 @@ exports.posts_get = [ loginCheck,
     asyncHandler(async (req, res, next) => {
         const user = await User.findById(req.user.id);
         const allPosts = await Post.find({}).populate("by").sort('-time');
+        const allComments = await Comment.find({}).populate("on").populate("by");
         let relevantPosts = [];
         for (let post of allPosts) {
             if (user.following.includes(post.by.id) || user.id === post.by.id) {
@@ -64,11 +65,8 @@ exports.posts_get = [ loginCheck,
         if (relevantPosts.length === 0) {
             res.render("posts", { user, message: 'No posts to show' });
         } else {
-            
-        }
-        
-        const allComments = await Comment.find({}).populate("on").populate("by");
-        res.render("posts", { user, allPosts, allComments });
+            res.render("posts", { user, relevantPosts, allComments });
+        }        
 })];
 
 exports.newcomment_get = [ loginCheck,
@@ -124,3 +122,16 @@ exports.like_post = [ loginCheck,
         res.redirect('/posts');
 })];
 
+exports.deletePost_get = [ loginCheck,
+    asyncHandler(async (req, res, next) => {
+        const user = await User.findById(req.user.id);
+        const post = await Post.findById(req.params.postid);
+        const allComments = await Comment.find({}).populate("on").populate("by");
+        res.render("delete-post", { user, post, allComments });
+})];
+
+exports.deletePost_post = [ loginCheck, asyncHandler(async (req, res, next) => {
+    await Comment.deleteMany({ on: req.body.postid });
+    await Post.findByIdAndDelete(req.body.postid);
+    res.redirect('/posts');
+})];

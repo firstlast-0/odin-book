@@ -1,79 +1,134 @@
 body {
-  margin: 0;
-  padding: 15px;
-  background-color: rgb(30, 30, 30);
-  color: white;
-  font-family: 'Liberation Mono', monospace;    
-  text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(30, 30, 30);
+    color: white;
+    font-family: 'Liberation Mono', monospace;
+    text-align: center;
 }
 
 a {
-  color: cornflowerblue;
-  text-decoration: none;
+    color: #10b981;
+    text-decoration: none;
 }
 
 a:hover {
-  color: cyan;
+    color: cyan;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+    max-width: 400px;
+    height: 80vh;
+    margin: 0 auto;
 }
 
 form {
-  display: inline-block;
+    display: inline-block;
 }
 
+.form {
+    border: 2px solid #047857;
+    padding: 15px;   
+}
+
+.container button {
+    width: 300px;
+    background-color: #047857;
+    color: white;
+    border: 0;
+    border-radius: 7px;
+    padding: 7px 0;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    cursor: grab;
+    background-color: #10b981;
+}
+
+.container button {
+    font-size: 1rem;   
+}
+
+input {
+    font-size: 1.4rem;
+}
+
+h1 {
+    margin: 0;
+}
+
+.welcome {
+    margin-top: 15px;
+}
+
+
 .nav {
-  display: flex;
-  gap: 30px;
-  justify-content: center;
-  font-size: 1.5rem;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    padding: 15px 0;
+    font-size: 1.5rem;
+    background-color: #111827;
 }
 
 .posts {
-  display: grid;
-  grid-template-columns: 750px;
-  gap: 35px;
-  justify-content: center;
+    display: grid;
+    grid-template-columns: 900px;
+    gap: 35px;
+    justify-content: center;
 }
 
 .post {
-  display: flex;
-  gap: 15px;
-  text-align: left;
-  border: 3px solid cornflowerblue;
-  border-radius: 10px;
-  padding: 10px;
+    display: flex;
+    gap: 15px;
+    text-align: left;
+    border: 3px solid #047857;
+    border-radius: 0 10px 10px 0;
+    padding: 10px;
 }
 
 .user {
-  display: flex;
-  flex-direction: column;
-}
-
-.user, .main, .comment {
-  flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .main {
-  flex-grow: 0;
-  flex-basis: 500px;
-  font-size: 0.9rem;
-  color: #a5a5a5;
+    flex-grow: 0;
+    flex-basis: 500px;
+    font-size: 0.9rem;
+    color: #a5a5a5;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+    font-size: 1.2rem;
 }
 
 .comment {
-  flex-shrink: 0;
+    flex-basis: 200px;
+    flex-grow: 0;
+    flex-shrink: 0;
 }
 
 .name {
-  font-size: 1.6rem;
+    font-size: 1.6rem;
 }
 
 .text {
-  color: white;
-  font-family: Arial, sans-serif;
-  font-size: 1.2rem;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 1.2rem;
 }
 
 img {
-  width: 100px;
-  height: 100px;
+    width: 100px;
+    height: 100px;
 }

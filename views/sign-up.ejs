@@ -1,19 +1,29 @@
 <%- include('header') -%>
 
-<a href="/login">Login</a>
-<h1>Sign Up</h1>
-<form action="/" method="POST">
-    <label for="username">Username</label>
-    <input name="username" id="username" />
-    <br><br>
-    <label for="password">Password</label>
-    <input name="password" type="password" id="password" />
-    <br><br>
-    <label for="conpass">Confirm Password</label>
-    <input name="conpass" id="conpass" type="password" />
-    <br><br>
-    <button>Sign Up</button>
-</form>
+<div class="nav">
+    <a href="/login">Login</a>
+</div>
+
+<div class="container">    
+    <form action="/" method="POST" class="form">
+        <h1>Create an Account</h1>
+        <br>
+        <input name="username" id="username" placeholder="Username" />
+        <br><br>
+        <input name="password" id="password" type="password" placeholder="Password" />
+        <br><br>
+        <input name="conpass" id="conpass" type="password" placeholder="Confirm Password" />
+        <br><br>
+        <button>Sign Up</button>
+    </form>
+    
+    <form action="/login" method="POST">
+        or
+        <br><br>
+        <input type="hidden" name="password" value="g">
+        <button name="username" value="Guest">Continue as Guest</button>
+    </form>
+</div>
 
 <% if(locals.errors) {%>
     <% for(let err of errors) {%>
