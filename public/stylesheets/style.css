@@ -35,7 +35,7 @@ form {
     padding: 15px;   
 }
 
-.container button {
+.container button, .users button {
     width: 300px;
     background-color: #047857;
     color: white;
@@ -43,15 +43,16 @@ form {
     border-radius: 7px;
     padding: 7px 0;
     margin-bottom: 10px;
+    font-size: 1rem;
 }
 
-.container button:hover:enabled {
-    cursor: grab;
+.users button {
+    width: 100px;
+}
+
+.container button:hover:enabled, .users button:hover:enabled {
+    cursor: pointer;
     background-color: #10b981;
-}
-
-.container button {
-    font-size: 1rem;   
 }
 
 input {
@@ -131,4 +132,23 @@ h1 {
 img {
     width: 100px;
     height: 100px;
+}
+
+.users {
+    margin: 0 auto;    
+    max-width: 500px;
+    display: grid;
+    grid-template-columns: repeat(2, 250px);
+    gap: 10px;   
+    font-size: 1.6rem;
+}
+
+.users > div {
+    padding: 10px;
+    border: 2px solid #047857;
+}
+
+.follow {
+    display: flex;
+    justify-content: space-evenly;
 }

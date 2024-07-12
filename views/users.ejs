@@ -4,24 +4,27 @@
 <br>
 <h2>All Users</h2>
 <br><br>
-<% for(let user of allUsers) {%>
-    <% if (user.id !== currentUser.id) {%>
-        <% if (!currentUser.following.includes(user.id)) {%>
-            <div>       
-                Username: <a href="<%= '/users/' + user.id %>"><%= user.username %></a><br>
-                <% if (user.follow_requests.includes(currentUser.id)) { %>
-                    <button disabled>PENDING</button>
-                <% } else { %>
-                    <form action="<%= '/users/' + user.id + '/follow' %>" method="post">
-                        <button>FOLLOW</button>
-                    </form>
-                <% } %>
-                <br>
-                <hr>
-            </div>
-        <% }%>
-    <% }%>
-<% } %>
+<div class="users">
+    <% for(let user of allUsers) {%>
+        <% if (user.id !== currentUser.id) {%>
+            <% if (!currentUser.following.includes(user.id)) {%>
+                <div>
+                    <img src="<%= 'https://www.gravatar.com/avatar/' + user.id + '?s=100&d=robohash' %>" />
+                    <div class="follow">
+                        <a href="<%= '/users/' + user.id %>"><%= user.username %></a>
+                        <% if (user.follow_requests.includes(currentUser.id)) { %>
+                            <button disabled>PENDING</button>
+                        <% } else { %>
+                            <form action="<%= '/users/' + user.id + '/follow' %>" method="post">
+                                <button>FOLLOW</button>
+                            </form>
+                        <% } %>
+                    </div>
+                </div>
+            <% } %>
+        <% } %>
+    <% } %>
+</div>
 
 <% if(locals.errors) {%>
     <% for(let err of errors) {%>
